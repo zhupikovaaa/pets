@@ -1,0 +1,40 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <map>
+#include <cassert>
+
+enum class option { A, B, C };
+
+using namespace std;
+
+struct [[nodiscard]] errorcode 
+{ 
+	int a; 
+};
+
+errorcode returnFunction()
+{
+	return errorcode({ 1 });
+}
+
+int main()
+{
+	option value = option::A;
+
+	switch (value)
+	{
+	case option::A:
+		[[fallthrough]];
+	case option::B:
+		[[fallthrough]];
+	case option::C:
+		break;
+	}
+
+	returnFunction();
+
+	[[maybe_unused]] auto result = returnFunction();
+	assert(result.a == 1);
+}
