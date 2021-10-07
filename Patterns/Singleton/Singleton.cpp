@@ -1,5 +1,7 @@
 #include "Singleton.h"
 
+Singleton* Singleton::pInstance { nullptr };
+std::mutex Singleton::mtx;
 
 Singleton* Singleton::getInstance()
 {
